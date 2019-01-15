@@ -1,5 +1,4 @@
 from PIL import Image
-from typing import List
 import numpy as np
 import sys
 
@@ -19,23 +18,6 @@ def composite_multi(images):
         images_array[i] = np.array(image.resize(size))
     median_pixels = np.median(images_array, axis=0).astype(np.uint8)
     image = Image.fromarray(median_pixels)
-    return image
-
-
-def overlay_two(background: Image, foreground: Image, alpha: float):
-    back = background
-    fore = foreground
-
-    back = ensure_is_rgba(back)
-    fore = ensure_is_rgba(fore)
-
-    fore = fore.resize(back.size)
-    return Image.blend(back, fore, alpha)
-
-
-def ensure_is_rgba(image: Image) -> Image:
-    if image.mode != "RGBA":
-        image = image.convert("RGBA")
     return image
 
 
