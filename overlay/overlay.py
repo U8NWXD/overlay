@@ -2,8 +2,25 @@ from PIL import Image
 import numpy as np
 import sys
 
+"""Combine a set of image files into a composite image by averaging pixel values
+
+Usage: overlay.py [mean | median] img1 img2 [additional images]
+
+The number of arguments is validated, but not the arguments themselves. If the
+mean is used to average, the composite image is named ``composite_mean.jpg``. If
+the median is used, the composite image is named ``composite_median.jpg``.
+
+Any existing composite image with the same name is overwritten.
+"""
+
 
 def composite_multi(images, use_mean=False):
+    """Combine a set of images into a composite by averaging the pixel values
+
+    :param images: Set of images to combine
+    :param use_mean: Whether to average using the mean, by default uses median
+    :return: Composite image
+    """
 
     # SOURCE: Reti43 on StackOverflow
     # https://stackoverflow.com/a/34625033
