@@ -3,7 +3,7 @@ import numpy as np
 import sys
 
 
-def composite_multi(images):
+def composite_multi(images, use_mean=False):
 
     # SOURCE: Reti43 on StackOverflow
     # https://stackoverflow.com/a/34625033
@@ -16,15 +16,39 @@ def composite_multi(images):
 
     for i, image in enumerate(images):
         images_array[i] = np.array(image.resize(size))
-    median_pixels = np.median(images_array, axis=0).astype(np.uint8)
-    image = Image.fromarray(median_pixels)
+    if use_mean:
+        combined_pixels = np.mean(images_array, axis=0).astype(np.uint8)
+    else:
+        combined_pixels = np.median(images_array, axis=0).astype(np.uint8)
+    image = Image.fromarray(combined_pixels)
     return image
 
 
 if __name__ == "__main__":
+    use_mean = False
+    usage = "Usage: overlay.py [mean | median] img1 img2 [additional images]"
     if len(sys.argv) < 3:
-        print("ERROR: Please specify at least 2 files to combine.")
+        print("ERROR: Insufficient arguments provided.")
+        print(usage)
         exit(1)
-    images = [Image.open(path) for path in sys.argv[1:]]
-    composite = composite_multi(images)
-    composite.save("composite.jpg", format="JPEG")
+    if sys.argv[1] == "mean" or sys.argv[1] == "median":
+        if len(sys.argv) < 4:
+            print("ERROR: Please specify at least 2 files to combine.")
+            print(usage)
+            exit(1)
+        image_paths = sys.argv[2:]
+        use_mean = sys.argv[1] == "mean"
+    else:
+        if len(sys.argv) < 3:
+            print("ERROR: Please specify at least 2 files to combine.")
+            print(usage)
+            exit(1)
+        image_paths = sys.argv[1:]
+
+    image_set = [Image.open(path) for path in image_paths]
+    composite = composite_multi(image_set, use_mean)
+    if use_mean:
+        name = "composite_mean.jpg"
+    else:
+        name = "composite_median.jpg"
+    composite.save(name, format="JPEG")
