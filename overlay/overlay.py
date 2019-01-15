@@ -1,3 +1,8 @@
+# This file is part of overlay: Makes multi-image composites
+# Copyright (c) 2018-2019 U8N WXD (github.com/U8NWXD) <cs.temporary@icloud.com>
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 from PIL import Image
 import numpy as np
 import sys
