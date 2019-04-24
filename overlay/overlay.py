@@ -1,11 +1,9 @@
+#!/usr/bin/env python3
+
 # This file is part of overlay: Makes multi-image composites
 # Copyright (c) 2018-2019 U8N WXD (github.com/U8NWXD) <cs.temporary@icloud.com>
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
-
-from PIL import Image
-import numpy as np
-import sys
 
 """Combine a set of image files into a composite image by averaging pixel values
 
@@ -17,6 +15,10 @@ the median is used, the composite image is named ``composite_median.jpg``.
 
 Any existing composite image with the same name is overwritten.
 """
+
+from PIL import Image
+import numpy as np
+import sys
 
 
 def composite_multi(images, use_mean=False):
