@@ -1,5 +1,9 @@
 # `overlay.py`: Makes Multi-Image Composites
 
+**WARNING: This repository is no longer maintained due to lack of use.
+If you are interested in using this software, please let me know. I may
+be able to start maintaining it again.**
+
 ## Usage
 
 * Install dependencies: `pip install -r requirements.txt`
